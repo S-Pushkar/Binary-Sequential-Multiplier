@@ -32,7 +32,7 @@ module t_Sequential_Binary_Multiplier;
     initial
     begin
         clock = 0;
-        repeat (17) #5 clock = ~clock;
+        repeat (100) #5 clock = ~clock;
     end
 
     // Display results and compare with Table 8.5

@@ -13,7 +13,7 @@ clock, reset_b);
     S_add = 3'b010,
     S_shift = 3'b100;
     reg [2: 0] state, next_state;
-    reg [dp_width -1: 0] A, B, Q; // Sized for datapath
+    reg [dp_width - 1: 0] A, B, Q; // Sized for datapath A=accumulator, B=Multiplicand, Q=Mulitplier
     reg C;
     reg [BC_size -1: 0] P;
     reg Load_regs, Decr_P, Add_regs, Shift_regs;
@@ -22,7 +22,6 @@ clock, reset_b);
     assign Product = {A, Q};
     wire Zero = (P == 0); // counter is zero
 
-    // Zero = ~|P; // alternative
     wire Ready = (state == S_idle); // controller status
 
     // control unit
@@ -68,5 +67,6 @@ clock, reset_b);
         if (Add_regs) {C, A} <= A + B;
         if (Shift_regs) {C, A, Q} <= {C, A, Q} >> 1;
         if (Decr_P) P <= P -1;
+        if (P == 3'b000) $finish;
     end
 endmodule
