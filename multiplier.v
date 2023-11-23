@@ -2,7 +2,7 @@ module Sequential_Binary_Multiplier (Product, Ready, Multiplicand, Multiplier, S
 clock, reset_b);
 
     // Default configuration: five-bit datapath
-    parameter dp_width = 5; // Set to width of datapath
+    parameter dp_width = 4; // Set to width of datapath
     output [2*dp_width -1: 0] Product;
     output Ready;
     input [dp_width -1: 0] Multiplicand, Multiplier;

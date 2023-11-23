@@ -1,6 +1,6 @@
 module t_Sequential_Binary_Multiplier;
 
-    parameter dp_width = 5; // Set to width of datapath
+    parameter dp_width = 4; // Set to width of datapath
     wire [2*dp_width -1: 0] Product; // Output from multiplier
     wire Ready;
     reg [dp_width -1: 0] Multiplicand, Multiplier; // Inputs to multiplier
@@ -22,18 +22,20 @@ module t_Sequential_Binary_Multiplier;
     begin
         Start = 0;
         reset_b = 0;
-        #2 Start = 1; reset_b = 1;
-        Multiplicand = 5'b10111; Multiplier = 5'b10011;
+        #2 Start = 1; 
+        reset_b = 1;
+        Multiplicand = 4'b1000;
+        Multiplier = 4'b1001;
         #10 Start = 0;
     end
 
     initial
     begin
         clock = 0;
-        repeat (26) #5 clock = ~clock;
+        repeat (17) #5 clock = ~clock;
     end
 
     // Display results and compare with Table 8.5
-    always @ ( posedge clock)
+    always @ ( posedge clock )
         $strobe ("C=%b A=%b Q=%b P=%b time=%0d",M0.C,M0.A,M0.Q,M0.P, $time);
 endmodule
